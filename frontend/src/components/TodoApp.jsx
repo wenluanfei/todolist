@@ -5,7 +5,7 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import '../styles/TodoApp.css';
 
-const API_BASE_URL = 'https://todo-backend-os66.onrender.com/api/todos';  //  线上后端地址
+const API_BASE_URL = 'https://todo-backend-os66.onrender.com/api/todos';  // Online backend URL
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
@@ -27,7 +27,7 @@ function TodoApp() {
       setTodos(res.data);
     } catch (error) {
       console.error('Failed to fetch todos:', error);
-      setError('加载任务失败，请稍后再试...');
+      setError('Failed to load tasks. Please try again later...');
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ function TodoApp() {
       setTodos([res.data, ...todos]);
     } catch (error) {
       console.error('Failed to add todo:', error);
-      setError('添加任务失败，请检查网络...');
+      setError('Failed to add task. Please check your network...');
     }
   };
 
@@ -57,7 +57,7 @@ function TodoApp() {
         if (newComboCount === 5) {
           setShowUltraReward(true);
           setTimeout(() => setShowUltraReward(false), 4000);
-          setComboCount(0);
+          setComboCount(0);  // Reset combo after ultra reward
         } else if (newComboCount === 3) {
           setShowMegaReward(true);
           setTimeout(() => setShowMegaReward(false), 3000);
@@ -68,7 +68,7 @@ function TodoApp() {
       }
     } catch (error) {
       console.error('Failed to toggle todo:', error);
-      setError('切换完成状态失败...');
+      setError('Failed to toggle completion status...');
     }
   };
 
@@ -78,7 +78,7 @@ function TodoApp() {
       setTodos(todos.filter(todo => todo._id !== id));
     } catch (error) {
       console.error('Failed to delete todo:', error);
-      setError('删除任务失败...');
+      setError('Failed to delete task...');
     }
   };
 
@@ -88,7 +88,7 @@ function TodoApp() {
       setTodos(todos.map(todo => (todo._id === id ? res.data : todo)));
     } catch (error) {
       console.error('Failed to edit todo:', error);
-      setError('保存修改失败...');
+      setError('Failed to save changes...');
     }
   };
 
@@ -101,9 +101,9 @@ function TodoApp() {
     >
       <h1>My To-Do List</h1>
 
-      {/* ✨ 完成任务计数器 */}
+      {/* 🎯 Completed task counter */}
       <div className="counter">
-        🎯 已完成任务数：{completedCount}
+        🎯 Completed Tasks: {completedCount}
       </div>
 
       <TodoForm addTodo={addTodo} />
@@ -129,7 +129,7 @@ function TodoApp() {
           exit={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          🎉 完成任务！棒极了！
+          🎉 Task Completed! Great Job!
         </motion.div>
       )}
 
@@ -141,7 +141,7 @@ function TodoApp() {
           exit={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          🏆 三连击奖励！继续加油！
+          🏆 Triple Combo! Keep Going!
         </motion.div>
       )}
 
@@ -153,7 +153,7 @@ function TodoApp() {
           exit={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          🎆 五连击大爆炸！太厉害了！
+          🎆 Five-Task Combo Explosion! Amazing!
         </motion.div>
       )}
     </motion.div>

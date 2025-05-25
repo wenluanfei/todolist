@@ -11,7 +11,7 @@ function TodoList({ todos, toggleComplete, deleteTodo, editTodo }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <p className="empty-text">🌿 暂无任务，快来添加一个吧！</p>
+        <p className="empty-text">🌿 No tasks yet. Add one to get started!</p>
       </motion.div>
     );
   }
@@ -19,16 +19,17 @@ function TodoList({ todos, toggleComplete, deleteTodo, editTodo }) {
   return (
     <ul className="todo-list">
       <AnimatePresence>
-        {todos.sort((a, b) => a.completed - b.completed)
-        .map((todo) => (
-          <TodoItem
-            key={todo._id}
-            todo={todo}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />
-        ))}
+        {todos
+          .sort((a, b) => a.completed - b.completed)  // Show incomplete tasks first
+          .map((todo) => (
+            <TodoItem
+              key={todo._id}
+              todo={todo}
+              toggleComplete={toggleComplete}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+            />
+          ))}
       </AnimatePresence>
     </ul>
   );

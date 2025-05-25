@@ -2,14 +2,13 @@ const express = require('express');
 const Todo = require('../models/Todo');
 const router = express.Router();
 
-// GET 获取所有 todos
+// GET: Fetch all todos
 router.get('/', async (req, res) => {
-  const todos = await Todo.find().sort({ completed: 1, createdAt: -1 }); // 排序条件
+  const todos = await Todo.find().sort({ completed: 1, createdAt: -1 }); // Sort by completion, then by creation date
   res.json(todos);
 });
 
-
-// POST 新建 todo
+// POST: Create a new todo
 router.post('/', async (req, res) => {
   const newTodo = new Todo({
     text: req.body.text,
@@ -21,8 +20,7 @@ router.post('/', async (req, res) => {
   res.json(savedTodo);
 });
 
-
-// PATCH 更新 todo
+// PATCH: Update a todo
 router.patch('/:id', async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
@@ -32,10 +30,10 @@ router.patch('/:id', async (req, res) => {
     }
 
     if (req.body && typeof req.body.text === 'string') {
-      // 如果 body 里面有 text，说明是编辑内容
+      // If text is provided in the body, update the content
       todo.text = req.body.text;
     } else {
-      // 否则切换完成状态
+      // Otherwise, toggle the completion status
       todo.completed = !todo.completed;
     }
 
@@ -47,8 +45,7 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-
-// DELETE 删除 todo
+// DELETE: Remove a todo
 router.delete('/:id', async (req, res) => {
   const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
   res.json(deletedTodo);

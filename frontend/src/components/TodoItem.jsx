@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { motion } from 'framer-motion'; // ✅ 引入 motion
+import { motion } from 'framer-motion'; //  motion
 
 function TodoItem({ todo, toggleComplete, deleteTodo, editTodo }) {
   const [isEditing, setIsEditing] = useState(false);
